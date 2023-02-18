@@ -1,0 +1,131 @@
+// use('BddAlumnos');
+
+// db.Estudiante.find()
+
+// INSERTAR UN DATO CON EL ONE
+
+// db.Estudiante.insertOne({"id":1,"nombre":"Esteban", "Apellido":"Bacuilima","telefono":4024869})
+
+// INSERTAR VARIOS DATOS EN UN MANY
+
+// db.Estudiante.insertMany([
+//   {
+//     id: 2,
+//     nombre: "Juan",
+//     apellido: "Yanqui",
+//     telefono: "42589458"
+//   },
+//   {
+//     id: 3,
+//     nombre: "Edison",
+//     apellido: "Quinde",
+//     telefono: "4025896"
+//   },
+//   {
+//     id: 4,
+//     nombre: "Jhonatan",
+//     apellido: "Gallegos",
+//     telefono: "4024859"
+//   }
+// ])
+
+// INSERTAR CON UNA ID REPETIDA
+
+// db.Estudiante.insertOne(
+//     {
+//     "_id": "63f0312c621fdf4531f23718",
+//     "id": 5,
+//     "nombre": "Bryam",
+//     "Apellido": "Tenecota",
+//     "telefono": 4024869
+//     }
+// )
+
+// ELIMINAR DATOS
+// db.Estudiante.deleteMany({})
+
+// ELIMINAR lA COLECCION
+// db.Estudiante.drop()
+
+// ELIMINAR BASE DE DATOS BddAlumnos.
+//db.dropDatabase()
+
+use('BDarticulos');
+
+// db.articulos.find({ })
+
+// db.articulos.insertMany([
+//     {
+//         _id: 1,
+//         nombre: 'MULTIFUNCION HP DESKJET 2675',
+//         rubro: 'impresora',
+//         precio: 3000,
+//         stock: 20
+//     },
+//     {
+//         _id: 2,
+//         nombre: 'MULTIFUNCION EPSON EXPRESSION XP241',
+//         rubro: 'impresora',
+//         precio: 3700,
+//         stock: 5
+//     },
+//     {
+//         _id: 3,
+//         nombre: 'LED 19 PHILIPS',
+//         rubro: 'monitor',
+//         precio: 4500,
+//         stock: 2
+//     },
+//     {
+//         _id: 4,
+//         nombre: 'LED 22 PHILIPS',
+//         rubro: 'monitor',
+//         precio: 5700,
+//         stock: 4
+//     },
+//     {
+//         _id: 5,
+//         nombre: 'LED 27 PHILIPS',
+//         rubro: 'monitor',
+//         precio: 12000,
+//         stock: 1
+//     },
+//     {
+//         _id: 6,
+//         nombre: 'LOGITECH M90',
+//         rubro: 'mouse',
+//         precio: 300,
+//         stock: 4
+//     }
+// ])
+
+// CONSULTAS
+
+// db.articulos.find()
+
+// 1
+// db.articulos.find({ rubro: { $ne: "impresora" } }, { })
+// 2
+//  db.articulos.find({ rubro: "mouse"  }, { })
+// 3
+// db.articulos.find({ precio: { $gte: 5000 } }, { })
+// 4
+//db.articulos.find({rubro:"impresora", precio: { $gte: 3500 } }, { })
+// 5
+// db.articulos.find({stock: {$gte: 0, $lte: 4}})
+// 6 ELIMINAR DATOS DE IMPRESORA CON 2 SINTAXIS
+// db.articulos.deleteMany({rubro: "impresora"})
+// db.articulos.remove({rubro: "impresoras"})
+// 7
+// db.articulos.deleteMany({ _id: { $gte: 5 } })
+
+// CON EL AND, OR y NOT
+// Imprimir todos los artículos cuyo stock se encuentra comprendido entre 0 y 4.
+// db.articulos.find({$and: [{ stock: { $gte: 0 } },{ stock: { $lte: 4 } }]})
+
+// Esto buscará todos los documentos en la colección "articulos" que tengan un rubro igual a "monitor" 
+// o un precio mayor o igual a 5000.
+// db.articulos.find({$or: [{ rubro: "monitor" },{ precio: { $gte: 5000 } }]})
+
+// Traer articulos q no sean impresora ni mouse
+db.articulos.find({rubro: {$not: {$in:["mouse", "impresora"]}}})
